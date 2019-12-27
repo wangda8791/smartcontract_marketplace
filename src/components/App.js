@@ -68,13 +68,21 @@ class App extends Component {
 
   async createProduct(name, price) {
     this.setState({ loading: true });
-    await this.state.marketplace.methods.createProduct(name, price).send({ from: this.state.account });
+    try {
+      await this.state.marketplace.methods.createProduct(name, price).send({ from: this.state.account });
+    } catch (err) {
+      console.log(err);
+    }
     this.setState({ loading: false });
   }
 
   async purchaseProduct(id, price) {
     this.setState({ loading: true });
-    await this.state.marketplace.methods.purchaseProduct(id).send({ from: this.state.account, value: price });
+    try {
+      await this.state.marketplace.methods.purchaseProduct(id).send({ from: this.state.account, value: price });
+    } catch (err) {
+      console.log(err);
+    }
     this.setState({ loading: false });
   }
 
